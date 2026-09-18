@@ -1,0 +1,389 @@
+/* Refinamiento visual: tipografía, marca y movimiento de la segunda versión. */
+:root {
+  --blue: #b9cce2;
+  --pink: #dcc6cf;
+}
+.brand {
+  gap: 13px;
+  letter-spacing: 0;
+  align-items: center;
+}
+.brand .brand-initials {
+  color: #e7edf5;
+  font-size: 24px;
+  letter-spacing: -1.5px;
+  border: 1px solid #a9bed04a;
+  width: 49px;
+  height: 49px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+}
+.brand .brand-name {
+  color: #edf1f6;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+.brand-name small {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  color: #aab5c4;
+  margin-top: 5px;
+  letter-spacing: 0.3px;
+}
+.nav-contact {
+  border-radius: 4px;
+}
+.navigation a {
+  position: relative;
+  padding-block: 7px;
+}
+.navigation a::after {
+  content: "";
+  height: 1px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #c7d6e8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.navigation a:hover::after,
+.navigation a:focus-visible::after {
+  transform: scaleX(1);
+}
+.hero {
+  grid-template-columns: 1.12fr 1fr;
+}
+.hero h1 {
+  font-size: clamp(42px, 4.65vw, 65px);
+  line-height: 1.13;
+  letter-spacing: -2.7px;
+  font-weight: 500;
+}
+.hero h1 .title-mask {
+  display: block;
+  overflow: hidden;
+  color: #f3f4f5;
+  padding-bottom: 6px;
+  margin-bottom: -6px;
+  white-space: nowrap;
+}
+.title-mask > span {
+  display: block;
+}
+.availability {
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  margin-bottom: 29px;
+}
+.intro {
+  max-width: 420px;
+  font-size: 14px;
+  line-height: 1.95;
+}
+.hero-caption {
+  margin-top: 42px;
+}
+.hero-art {
+  background: radial-gradient(ellipse at center, #29405740, transparent 68%);
+}
+.scroll-artwork {
+  position: relative;
+  z-index: 2;
+}
+.phone-position {
+  transform: rotate(3deg);
+}
+.floating-tag {
+  border-radius: 3px;
+  font-size: 10px;
+  box-shadow: 0 12px 30px #07111f30;
+}
+.tag-code {
+  transform: rotate(-3deg);
+}
+.tag-design {
+  transform: rotate(3deg);
+  color: #d0dbe7;
+}
+.small-star {
+  font-size: 25px;
+}
+.orbit-one {
+  animation: orbit-arrival 2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.orbit-two {
+  animation: orbit-arrival 2.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.button {
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    #ffffff7a 50%,
+    transparent 80%
+  );
+  transform: translateX(-110%);
+  transition: transform 0.65s ease;
+  pointer-events: none;
+}
+.button:hover::before {
+  transform: translateX(110%);
+}
+.button svg,
+.text-link svg,
+.nav-contact svg,
+.email-link svg {
+  transition: transform 0.3s;
+}
+.button:hover svg {
+  transform: translateY(-2px);
+}
+.text-link:hover svg,
+.nav-contact:hover svg,
+.email-link:hover svg {
+  transform: translate(3px, -3px);
+}
+.tech-inner b {
+  transition:
+    color 0.25s,
+    transform 0.25s;
+}
+.tech-inner b:hover {
+  color: white;
+  transform: translateY(-4px);
+}
+.tech-strip {
+  background: #152235;
+}
+.section-kicker {
+  color: #b6c2d0;
+}
+h2 {
+  font-size: 38px;
+  letter-spacing: -1.3px;
+}
+.project-card {
+  border: 1px solid #53667b3b;
+  border-radius: 7px;
+}
+.project-visual {
+  background: #dcc6cf;
+}
+.project-quote {
+  box-shadow: 0 18px 35px #4826391c;
+}
+.about-art {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.blueprint-scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24%;
+  left: -30%;
+  background: linear-gradient(90deg, transparent, #b9cce213, transparent);
+  pointer-events: none;
+}
+.about-art:hover .blueprint-scan {
+  animation: blueprint-pass 1.8s ease-in-out;
+}
+.about-art .bracket {
+  transition: transform 0.55s;
+}
+.about-art:hover .bracket:first-of-type {
+  transform: translateX(-6px);
+}
+.about-art:hover .bracket {
+  color: #b4cadb;
+}
+.about-copy h2 {
+  font-size: 34px;
+}
+.service-grid {
+  gap: 24px;
+}
+.service {
+  height: 100%;
+  padding: 25px 18px 22px;
+  position: relative;
+  transition:
+    background 0.3s,
+    transform 0.3s;
+}
+.service::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  left: 0;
+  right: 0;
+  top: -1px;
+  background: #bdcfe0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s;
+}
+.service:hover {
+  background: #1c2e425c;
+  transform: translateY(-5px);
+}
+.service:hover::before {
+  transform: scaleX(1);
+}
+.service > svg {
+  transition:
+    transform 0.4s,
+    color 0.4s;
+}
+.service:hover > svg {
+  transform: translateY(-4px) rotate(-5deg);
+  color: white;
+}
+.service h3 {
+  font-size: 20px;
+}
+.services {
+  padding-bottom: 60px;
+}
+.contact {
+  border-radius: 6px;
+  border: 1px solid #63788e45;
+  background: #1b3045;
+}
+.contact h2 {
+  font-size: 39px;
+}
+.contact-form textarea {
+  transition:
+    border-color 0.25s,
+    background 0.25s;
+}
+.contact-form textarea:focus {
+  background: #20384f;
+  border-color: #c0d0e0;
+}
+@keyframes orbit-arrival {
+  from {
+    opacity: 0;
+    scale: 0.75;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes blueprint-pass {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 110%;
+  }
+}
+@media (max-width: 1100px) {
+  .header {
+    gap: 24px;
+  }
+  .navigation {
+    gap: 22px;
+  }
+  .hero h1 {
+    font-size: 46px;
+  }
+  .hero {
+    gap: 20px;
+  }
+  .brand .brand-name {
+    font-size: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: clamp(37px, 7.5vw, 58px);
+  }
+  .hero-copy {
+    max-width: 650px;
+  }
+  .brand .brand-name {
+    display: none;
+  }
+  .hero-art {
+    margin-top: 20px;
+  }
+  h2 {
+    font-size: 33px;
+  }
+  .service {
+    padding-inline: 4px;
+  }
+}
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: clamp(31px, 8.2vw, 43px);
+    letter-spacing: -1.4px;
+  }
+  .availability {
+    font-size: 9px;
+    gap: 8px;
+  }
+  .hero-actions {
+    gap: 18px;
+  }
+  .hero-art {
+    margin-top: 5px;
+  }
+  .brand .brand-name {
+    display: block;
+    font-size: 10px;
+  }
+  .brand-name small {
+    font-size: 8px;
+  }
+  .brand {
+    gap: 8px;
+  }
+  .brand .brand-initials {
+    width: 35px;
+    height: 38px;
+    font-size: 20px;
+  }
+  .header {
+    gap: 12px;
+  }
+  .nav-contact {
+    padding: 9px 12px;
+  }
+  .contact h2 {
+    font-size: 31px;
+  }
+  .about-copy h2 {
+    font-size: 29px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service:hover,
+  .tech-inner b:hover,
+  .button:hover svg,
+  .service:hover > svg,
+  .text-link:hover svg,
+  .nav-contact:hover svg,
+  .email-link:hover svg {
+    transform: none;
+  }
+}

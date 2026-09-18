@@ -1,0 +1,629 @@
+/* Dirección Joker: cartas, contraste teatral y acentos de violeta y verde. */
+:root {
+  background: #100f14;
+  color: #f4f1eb;
+  --ink: #100f14;
+  --panel: #1b1722;
+  --muted: #b2abbc;
+  --blue: #c4ed79;
+  --line: #c4a3e124;
+}
+::selection {
+  background: #c4ed79;
+  color: #17131c;
+}
+.portfolio {
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 85% 9%, #48205a29, transparent 28%), #100f14;
+}
+.brand .brand-initials {
+  color: #c4ed79;
+  border-color: #c4ed7960;
+  transform: rotate(-5deg);
+}
+.brand .brand-name {
+  color: #f4f1eb;
+}
+.brand-name small,
+.navigation {
+  color: #bbb2c4;
+}
+.nav-contact {
+  border-color: #9581a360;
+}
+.navigation a::after,
+.reading-progress {
+  background: #c4ed79;
+}
+.hero {
+  min-height: 745px;
+  padding-top: 38px;
+  padding-bottom: 42px;
+}
+.hero h1 {
+  font-size: clamp(43px, 4.9vw, 69px);
+}
+.hero h1 .title-mask {
+  color: #f4f1eb;
+}
+.hero h1 .title-mask:last-child {
+  color: #c4ed79;
+}
+.hero .availability {
+  color: #b9abc6;
+}
+.availability > span,
+.location > span:first-child {
+  background: #c4ed79;
+}
+.intro {
+  color: #b8afc0;
+}
+.light {
+  background: #c4ed79;
+  color: #15131a;
+}
+.light:hover {
+  background: #d6ff90;
+}
+.hero-art {
+  overflow: visible;
+  background: none;
+  height: 615px;
+}
+.joker-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  perspective: 1100px;
+}
+.stage-halo {
+  position: absolute;
+  width: 410px;
+  height: 410px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #74429448, transparent 67%);
+  border: 1px solid #a777c524;
+}
+.stage-halo::before,
+.stage-halo::after {
+  content: "";
+  position: absolute;
+  inset: -36px;
+  border: 1px dashed #a777c51c;
+  border-radius: 50%;
+  animation: stage-spin 65s linear infinite;
+}
+.stage-halo::after {
+  inset: 48px;
+  border-style: solid;
+}
+.joker-tilt {
+  position: relative;
+  z-index: 3;
+}
+.joker-card {
+  position: relative;
+  width: 280px;
+  height: 414px;
+  border: 1px solid #efe6f8;
+  border-radius: 13px;
+  background: #f0eadf;
+  color: #21142d;
+  box-shadow: 0 28px 65px #0006;
+  transform: rotate(-5deg);
+  overflow: hidden;
+  animation: card-float 7s ease-in-out infinite;
+}
+.joker-card::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border: 1px solid #3f28574a;
+  border-radius: 7px;
+}
+.joker-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    #47324f06 3px 4px
+  );
+  pointer-events: none;
+}
+.card-corner {
+  position: absolute;
+  left: 23px;
+  top: 21px;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  line-height: 0.9;
+}
+.card-corner span {
+  display: block;
+  font-size: 23px;
+  margin-top: 7px;
+}
+.bottom-corner {
+  left: auto;
+  top: auto;
+  bottom: 21px;
+  right: 23px;
+  transform: rotate(180deg);
+}
+.card-edition {
+  position: absolute;
+  top: 35px;
+  left: 70px;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  color: #65536f;
+}
+.joker-emblem {
+  position: absolute;
+  left: 45px;
+  top: 112px;
+  width: 188px;
+  height: 151px;
+  transform: rotate(-8deg);
+}
+.eye {
+  position: absolute;
+  top: 0;
+  width: 38px;
+  height: 35px;
+  background: #5d287a;
+  clip-path: polygon(5% 5%, 100% 61%, 35% 100%);
+}
+.eye-left {
+  left: 14px;
+  transform: rotate(10deg);
+}
+.eye-right {
+  right: 14px;
+  transform: scaleX(-1) rotate(10deg);
+}
+.grin {
+  position: absolute;
+  top: 50px;
+  left: 7px;
+  width: 174px;
+  height: 78px;
+  background: #30193e;
+  border-radius: 5% 5% 65% 65%;
+  transform: rotate(-3deg);
+  overflow: hidden;
+  display: flex;
+  gap: 3px;
+  padding: 5px 10px 30px;
+  clip-path: polygon(
+    0 0,
+    20% 19%,
+    48% 27%,
+    75% 19%,
+    100% 0,
+    92% 65%,
+    72% 90%,
+    45% 100%,
+    19% 78%
+  );
+}
+.grin i {
+  flex: 1;
+  height: 40px;
+  background: #bddf70;
+  transform: rotate(5deg);
+}
+.card-title {
+  position: absolute;
+  bottom: 66px;
+  left: 35px;
+  right: 35px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 43px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: center;
+}
+.card-title span {
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  margin-top: 10px;
+}
+.card-back {
+  position: absolute;
+  width: 280px;
+  height: 414px;
+  border: 1px solid #b899d269;
+  border-radius: 13px;
+  background: repeating-linear-gradient(45deg, #45265b 0 2px, #352044 2px 13px);
+  box-shadow: 0 16px 35px #0004;
+  display: grid;
+  place-items: center;
+}
+.card-back::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid #bfa7d859;
+  border-radius: 7px;
+}
+.card-back span {
+  font-family: Georgia, serif;
+  font-size: 90px;
+  color: #bba2d099;
+}
+.back-two {
+  background: #2b3323;
+  border-color: #b7d97955;
+}
+.back-two::before {
+  border-color: #b7d97955;
+}
+.back-two span {
+  color: #c4ed7960;
+}
+.scene-cross {
+  position: absolute;
+  font-size: 24px;
+  color: #a37bbe;
+  font-weight: 300;
+}
+.cross-one {
+  top: 66px;
+  left: 30px;
+}
+.cross-two {
+  bottom: 67px;
+  right: 25px;
+}
+.floating-suit {
+  position: absolute;
+  font-size: 41px;
+  color: #c4ed79;
+  z-index: 4;
+  animation: suit-float 6s ease-in-out infinite;
+}
+.suit-one {
+  left: 5px;
+  bottom: 135px;
+  transform: rotate(-18deg);
+}
+.suit-two {
+  right: 13px;
+  top: 120px;
+  color: #bd83df;
+  animation-delay: -3s;
+}
+.scene-caption {
+  position: absolute;
+  bottom: 22px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #aa9bb5;
+}
+.tech-strip {
+  background: #1d1727;
+  border-color: #9970b32b;
+}
+.tech-inner b {
+  color: #cdc0d8;
+}
+.strip-star {
+  color: #c4ed79;
+}
+.section-kicker {
+  color: #b497c9;
+}
+.section-aside {
+  color: #ad9cba;
+}
+.project-card {
+  background: #1b1722;
+  border-color: #aa81c638;
+}
+.project-copy h3 {
+  color: #f4f1eb;
+}
+.project-status {
+  color: #bcaac9;
+}
+.project-visual {
+  min-height: 418px;
+  background: #d5c2ca;
+}
+.project-phone {
+  position: absolute;
+  right: 28px;
+  top: 24px;
+  width: 160px;
+  height: 330px;
+}
+.project-phone > .phone {
+  transform: scale(0.6) rotate(6deg);
+  transform-origin: top left;
+}
+.project-wordmark {
+  margin-top: 46px;
+}
+.project-details {
+  background: #1b1722;
+}
+.tags span {
+  border-color: #9c79b13d;
+}
+.case-button {
+  transition: color 0.25s;
+}
+.case-button:hover {
+  color: #c4ed79;
+}
+.about-art {
+  background-color: #21182c;
+  background-image: radial-gradient(#d3b7eb17 1px, transparent 1px);
+  border-color: #a67fc440;
+}
+.about-monogram {
+  color: #c4ed79;
+}
+.about-monogram > span {
+  color: #c7a0e2;
+}
+.bracket {
+  color: #754b91;
+}
+.service {
+  border-color: #85629466;
+}
+.service:hover {
+  background: #30203e70;
+}
+.service::before {
+  background: #c4ed79;
+}
+.service > span {
+  color: #bfa1cf;
+}
+.service > svg {
+  color: #c4ed79;
+}
+.contact {
+  background:
+    radial-gradient(ellipse at left bottom, #58287150, transparent 70%), #23182e;
+  border-color: #a174be4d;
+}
+.contact-form textarea {
+  background: #18111f;
+  border-color: #a174be45;
+}
+.contact-form textarea:focus {
+  background: #2c1d38;
+  border-color: #b49ace;
+}
+.contact-form textarea::placeholder {
+  color: #a99ab5;
+}
+.contact-form p {
+  color: #b6a4c3;
+}
+.motion-toggle {
+  border: 1px solid #9b7cb345;
+  background: none;
+  padding: 8px 10px;
+  font-size: 9px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.motion-paused *,
+.motion-paused *::before,
+.motion-paused *::after {
+  animation-play-state: paused !important;
+}
+@keyframes card-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+}
+@keyframes suit-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -15px;
+  }
+}
+@keyframes stage-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+@media (max-width: 1100px) {
+  .hero h1 {
+    font-size: 46px;
+  }
+  .project-phone {
+    right: 15px;
+  }
+  .project-wordmark {
+    font-size: 42px;
+  }
+  .footer {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 800px) {
+  .hero h1 {
+    font-size: clamp(36px, 7.5vw, 58px);
+  }
+  .hero-art {
+    height: 560px;
+  }
+  .project-phone {
+    right: 18%;
+  }
+  .project-wordmark {
+    margin-left: 20px;
+    font-size: 58px;
+  }
+  .stage-halo {
+    width: 370px;
+    height: 370px;
+  }
+}
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: clamp(31px, 8.2vw, 43px);
+  }
+  .hero-art {
+    height: 500px;
+    width: 100%;
+  }
+  .joker-card,
+  .card-back {
+    width: 235px;
+    height: 352px;
+  }
+  .joker-emblem {
+    left: 27px;
+    top: 90px;
+    transform: scale(0.9) rotate(-8deg);
+  }
+  .card-title {
+    font-size: 32px;
+    bottom: 52px;
+  }
+  .card-title span {
+    font-size: 7px;
+  }
+  .card-edition {
+    font-size: 7px;
+    left: 63px;
+  }
+  .card-corner {
+    font-size: 26px;
+  }
+  .stage-halo {
+    width: 270px;
+    height: 270px;
+  }
+  .stage-halo::before {
+    inset: -15px;
+  }
+  .floating-suit {
+    font-size: 28px;
+  }
+  .scene-caption {
+    font-size: 8px;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+  }
+  .cross-one {
+    left: 0;
+    top: 30px;
+  }
+  .project-visual {
+    min-height: 435px;
+  }
+  .project-wordmark {
+    margin: 8px 0 0;
+    font-size: 38px;
+  }
+  .project-wordmark > span {
+    font-size: 49px;
+  }
+  .project-phone {
+    right: 20px;
+    top: 72px;
+  }
+  .visual-caption {
+    bottom: 17px;
+  }
+  .navigation {
+    background: #291c34;
+    border-color: #9972ad60;
+  }
+  .footer > p {
+    order: 5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .joker-card,
+  .floating-suit,
+  .stage-halo::before,
+  .stage-halo::after {
+    animation: none;
+  }
+}
+
+/* Mantener legible la demo, especialmente al interactuar desde el teléfono. */
+.project-visual {
+  min-height: 535px;
+}
+.project-phone {
+  width: 225px;
+  height: 465px;
+  right: 22px;
+  top: 28px;
+}
+.project-phone > .phone {
+  transform: scale(0.84) rotate(3deg);
+}
+.project-wordmark {
+  font-size: 43px;
+}
+@media (max-width: 1100px) and (min-width: 801px) {
+  .project-wordmark {
+    font-size: 34px;
+  }
+  .project-wordmark > span {
+    font-size: 52px;
+  }
+  .project-phone {
+    right: 8px;
+  }
+}
+@media (max-width: 800px) {
+  .project-phone {
+    right: 12%;
+  }
+}
+@media (max-width: 520px) {
+  .project-visual {
+    min-height: 665px;
+  }
+  .project-phone {
+    top: 165px;
+    right: calc(50% - 114px);
+  }
+  .project-wordmark {
+    font-size: 32px;
+    margin-top: 0;
+    line-height: 0.85;
+  }
+  .project-wordmark > span {
+    font-size: 43px;
+  }
+  .project-wordmark > svg {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
