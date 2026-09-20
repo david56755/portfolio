@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import initialContent from "./content.json";
+import { validateContent } from "./contentValidation.js";
 import NailPreview from "./NailPreview";
 import WildTable from "./WildTable";
 import CasinoCompanion from "./CasinoCompanion";
@@ -79,14 +80,7 @@ export default function App() {
         return response.json();
       })
       .then((data) => {
-        if (
-          typeof data.name === "string" &&
-          typeof data.whatsapp === "string" &&
-          typeof data.project?.name === "string" &&
-          Array.isArray(data.project?.stack) &&
-          Array.isArray(data.project?.features)
-        )
-          setContent(data);
+        if (validateContent(data)) setContent(data);
       })
       .catch(() => {
         /* Se conserva el contenido local en modo estático. */
@@ -393,7 +387,24 @@ export default function App() {
           </Reveal>
         </section>
       </main>
-      <CasinoCompanion paused={motionPaused} />
+      <CasinoCompanion
+        paused={motionPaused}
+        selectedCount={selectedServices.length}
+        onChoose={(service, draft) => {
+          setSelectedServices((current) =>
+            current.includes(service) ? current : [...current, service],
+          );
+          setMessage((current) => current || draft);
+          requestAnimationFrame(() => {
+            document
+              .getElementById("contacto")
+              ?.scrollIntoView({
+                behavior: reduced || motionPaused ? "instant" : "smooth",
+              });
+            document.getElementById("idea")?.focus({ preventScroll: true });
+          });
+        }}
+      />
       <footer className="footer wrap">
         <a href="#inicio" className="footer-name">
           {content.name}

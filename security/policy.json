@@ -1,0 +1,4 @@
+{
+  "csp": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action https://wa.me https://api.whatsapp.com https://web.whatsapp.com; base-uri 'none'; object-src 'none'; frame-src 'none'",
+  "referrer": "no-referrer"
+}

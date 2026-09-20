@@ -328,3 +328,9 @@ El personaje queda fijo en la esquina inferior izquierda; en móvil reduce su ta
 Las cartas de servicios giran su símbolo al pasar el cursor y muestran una ficha animada al seleccionarlas. La flecha de portada tiene una oscilación espaciada. Los nombres Expo y Firebase se retiraron de todos los textos de la web: `App.jsx`, `WildTable.jsx`, `NailsCaseStudy.jsx` y `content.json`. Esto modifica la presentación del portafolio, no la implementación de Cotiza Nails.
 
 Validación: compilación Pages, ausencia de ambos nombres en el DOM, barajado por clic, minimizar/restaurar, pausa global, revisión móvil de 390 píxeles sin desbordamiento y consola sin errores.
+
+## 13. El Joker prepara proyectos y seguridad
+
+CasinoCompanion ahora recibe onChoose y selectedCount. El botón abre un dialog nativo: showModal bloquea la interacción con el fondo y mantiene el teclado dentro; Escape cierra y devuelve el foco. Las tres opciones de choices incluyen servicio y borrador. App añade el servicio sin duplicarlo, conserva el mensaje si ya tiene contenido y enfoca el campo de contacto. La animación usa Motion, pero los botones siguen funcionando con los efectos pausados. Un IntersectionObserver actualiza la frase del personaje según la sección y el contador de servicios activa una celebración breve.
+
+contentValidation.js valida la API antes de setContent. security/policy.json comparte la política de producción entre vite.config.js y backend/main.py. tests/security.test.mjs y tests/security_backend.py comprueban esas medidas. .github/dependabot.yml propone actualizaciones; .gitignore amplía la exclusión de secretos. Consulta SEGURIDAD.md para resultados, comandos y límites concretos de GitHub Pages.

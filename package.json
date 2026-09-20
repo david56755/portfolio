@@ -7,7 +7,8 @@
     "build": "vite build",
     "build:pages": "vite build --mode pages",
     "deploy": "node scripts/deploy-pages.mjs",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "test:security": "npm run build:pages && node --test tests/security.test.mjs"
   },
   "license": "ISC",
   "type": "module",

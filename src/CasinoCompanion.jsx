@@ -1,14 +1,70 @@
-import { useEffect, useState } from "react";
-import { useReducedMotion } from "motion/react";
-import { Minus, Spade } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { Minus, Spade, X, ArrowUpRight } from "lucide-react";
 import "./casino.css";
 
 // SVG propio: las piezas se animan con CSS, sin vídeos ni imágenes pesadas.
-export default function CasinoCompanion({ paused }) {
+const choices = [
+  {
+    suit: "♠",
+    title: "Quiero una web",
+    service: "Desarrollo web",
+    text: "Una página con identidad para presentar tu trabajo o tu negocio.",
+    message:
+      "Me gustaría crear una página web. Quiero conversar sobre su contenido, diseño y alcance.",
+  },
+  {
+    suit: "♣",
+    title: "Quiero una app",
+    service: "Aplicaciones a medida",
+    text: "Una herramienta alrededor de lo que necesitas resolver.",
+    message:
+      "Me gustaría desarrollar una aplicación. Quiero definir sus funcionalidades y el alcance del proyecto.",
+  },
+  {
+    suit: "♦",
+    title: "Quiero automatizar",
+    service: "Integraciones y automatización",
+    text: "Menos tareas repetitivas. Más tiempo para lo que importa.",
+    message:
+      "Me gustaría automatizar un proceso de mi negocio. Quiero conversar sobre las herramientas que uso y lo que necesito conectar.",
+  },
+];
+
+export default function CasinoCompanion({
+  paused,
+  onChoose,
+  selectedCount = 0,
+}) {
   const [compact, setCompact] = useState(false);
   const [dealing, setDealing] = useState(false);
   const [hiddenPage, setHiddenPage] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [section, setSection] = useState("inicio");
+  const dialogRef = useRef(null);
+  const previousCount = useRef(selectedCount);
   const reduced = useReducedMotion();
+  useEffect(() => {
+    if (open) dialogRef.current?.showModal();
+    else dialogRef.current?.close();
+  }, [open]);
+  useEffect(() => {
+    if (selectedCount > previousCount.current) setDealing(true);
+    previousCount.current = selectedCount;
+  }, [selectedCount]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries)
+          if (entry.isIntersecting) setSection(entry.target.id);
+      },
+      { rootMargin: "-15% 0px -55% 0px", threshold: 0 },
+    );
+    document
+      .querySelectorAll("main section[id]")
+      .forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
   const still = paused || reduced || hiddenPage;
   useEffect(() => {
     const sync = () => setHiddenPage(document.hidden);
@@ -50,9 +106,13 @@ export default function CasinoCompanion({ paused }) {
           </button>
           <button
             className="casino-character"
-            onClick={() => setDealing(true)}
-            aria-label="Barajar cartas con el comodín"
-            disabled={still || dealing}
+            onClick={() => {
+              setDealing(true);
+              setOpen(true);
+            }}
+            aria-label="Elegir proyecto con el comodín"
+            aria-haspopup="dialog"
+            aria-expanded={open}
           >
             <svg viewBox="0 0 220 250" aria-hidden="true" focusable="false">
               <ellipse
@@ -232,10 +292,88 @@ export default function CasinoCompanion({ paused }) {
                 />
               </g>
             </svg>
-            <span>{dealing ? "Tu próxima jugada…" : "¿Barajamos?"}</span>
+            <span>
+              {dealing
+                ? "¡Buena jugada!"
+                : section === "contacto"
+                  ? "Preparemos tu idea"
+                  : ["proyectos", "caso-cotiza-nails"].includes(section)
+                    ? "Conoce Cotiza Nails"
+                    : "Elige tu próxima jugada"}
+            </span>
           </button>
         </>
       )}
+      <dialog
+        ref={dialogRef}
+        className="joker-dialog"
+        aria-labelledby="joker-dialog-title"
+        aria-describedby="joker-dialog-description"
+        onCancel={() => setOpen(false)}
+        onClose={() => setOpen(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) setOpen(false);
+        }}
+      >
+        <div className="joker-choice-table">
+          <button
+            type="button"
+            className="joker-dialog-close"
+            onClick={() => setOpen(false)}
+            aria-label="Cerrar selección de proyecto"
+            autoFocus
+          >
+            <X size={20} />
+          </button>
+          <p className="joker-table-label">La siguiente carta la eliges tú.</p>
+          <h2 id="joker-dialog-title">¿Qué vamos a crear?</h2>
+          <p id="joker-dialog-description">
+            Elige una carta. Prepararemos tu consulta para que puedas
+            completarla antes de enviarla.
+          </p>
+          <div className="joker-choice-hand">
+            {open &&
+              choices.map((choice, index) => (
+                <motion.button
+                  type="button"
+                  className={"joker-choice joker-choice-" + index}
+                  key={choice.service}
+                  initial={{
+                    opacity: still ? 1 : 0,
+                    y: still ? 0 : 80,
+                    rotate: still ? 0 : -12,
+                  }}
+                  animate={{ opacity: 1, y: 0, rotate: 0 }}
+                  transition={{
+                    duration: still ? 0 : 0.45,
+                    delay: still ? 0 : index * 0.1,
+                  }}
+                  onClick={() => {
+                    dialogRef.current?.close();
+                    setOpen(false);
+                    onChoose(choice.service, choice.message);
+                  }}
+                >
+                  <span className="joker-choice-corner" aria-hidden="true">
+                    {choice.suit}
+                  </span>
+                  <span className="joker-choice-suit" aria-hidden="true">
+                    {choice.suit}
+                  </span>
+                  <strong>{choice.title}</strong>
+                  <span className="joker-choice-detail">{choice.text}</span>
+                  <span className="joker-choice-action">
+                    Preparar consulta <ArrowUpRight size={18} />
+                  </span>
+                </motion.button>
+              ))}
+          </div>
+          <p className="joker-choice-note">
+            Tu texto se conserva si ya empezaste a escribir. Puedes combinar
+            servicios en contacto.
+          </p>
+        </div>
+      </dialog>
     </aside>
   );
 }

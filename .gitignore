@@ -10,3 +10,17 @@ __pycache__/
 .codex/
 .pages-deploy/
 *.log
+
+.env.*
+!.env.pages
+*.pem
+*.key
+
+*.p12
+*.pfx
+*.keystore
+*.db
+*.sqlite
+*.sqlite3
+credentials*.json
+service-account*.json
