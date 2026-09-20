@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
   Braces,
+  CodeXml,
   Layers3,
   Menu,
   MessageCircle,
@@ -15,11 +16,21 @@ import {
 import initialContent from "./content.json";
 import { validateContent } from "./contentValidation.js";
 import NailPreview from "./NailPreview";
+import { ProjectReveal, ServiceChips } from "./PokerEffects";
 import WildTable from "./WildTable";
 import CasinoCompanion from "./CasinoCompanion";
 import ProjectWorkbench from "./ProjectWorkbench";
 import NailsCaseStudy, { ProfileCard } from "./NailsCaseStudy";
-import { Reveal, Tilt } from "./Animations";
+import {
+  DealIn,
+  Magnetic,
+  Reveal,
+  SplitReveal,
+  Tilt,
+  useSpotlight,
+} from "./Animations";
+
+const github = "https://github.com/david56755";
 
 const services = [
   {
@@ -48,6 +59,7 @@ const services = [
 export default function App() {
   const [content, setContent] = useState(initialContent);
   const [menu, setMenu] = useState(false);
+  const [jokerTrick, setJokerTrick] = useState(0);
   const [message, setMessage] = useState("");
   const [motionPaused, setMotionPaused] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -67,6 +79,7 @@ export default function App() {
     .filter(Boolean)
     .join("\n\n");
   const reduced = useReducedMotion();
+  const spotlight = useSpotlight(motionPaused);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
@@ -132,9 +145,11 @@ export default function App() {
             Servicios
           </a>
         </nav>
-        <a href="#contacto" className="nav-contact">
-          Contacto <ArrowUpRight size={16} />
-        </a>
+        <Magnetic paused={motionPaused} strength={0.22}>
+          <a href="#contacto" className="nav-contact">
+            Contacto <ArrowUpRight size={16} />
+          </a>
+        </Magnetic>
         <button
           className="menu-button"
           aria-label={menu ? "Cerrar menú" : "Abrir menú"}
@@ -146,7 +161,10 @@ export default function App() {
         </button>
       </header>
       <main id="contenido">
-        <WildTable paused={motionPaused} />
+        <WildTable
+          paused={motionPaused}
+          onSurprise={() => setJokerTrick((value) => value + 1)}
+        />
         <div className="tech-strip">
           <div className="wrap tech-inner">
             <span>Tecnologías de trabajo</span>
@@ -163,16 +181,12 @@ export default function App() {
           <Reveal className="section-heading">
             <div>
               <p className="section-kicker">Portafolio de desarrollo</p>
-              <h2>
-                El trabajo
-                <br />
-                habla.
-              </h2>
+              <SplitReveal lines={["El trabajo", "habla."]} />
             </div>
             <span className="section-aside">De la necesidad a la solución</span>
           </Reveal>
           <Reveal>
-            <Tilt className="project-card" paused={motionPaused}>
+            <Tilt className="project-card spotlight" paused={motionPaused}>
               <div className="project-visual">
                 <div className="project-wordmark">
                   cotiza
@@ -181,7 +195,9 @@ export default function App() {
                   <Sparkles size={32} />
                 </div>
                 <div className="project-phone">
-                  <NailPreview />
+                  <ProjectReveal paused={motionPaused}>
+                    <NailPreview />
+                  </ProjectReveal>
                 </div>
                 <span className="visual-caption">
                   Una herramienta para quienes crean con sus manos.
@@ -199,9 +215,11 @@ export default function App() {
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-                <a className="case-button" href="#caso-cotiza-nails">
-                  Explorar el caso de estudio <ArrowUpRight size={22} />
-                </a>
+                <Magnetic paused={motionPaused} strength={0.18}>
+                  <a className="case-button" href="#caso-cotiza-nails">
+                    Explorar el caso de estudio <ArrowUpRight size={22} />
+                  </a>
+                </Magnetic>
               </div>
             </Tilt>
           </Reveal>
@@ -228,22 +246,52 @@ export default function App() {
           </Reveal>
           <Reveal className="about-copy" delay={0.12}>
             <p className="section-kicker">Perfil profesional</p>
-            <h2>
-              Brandon Lozada.
-              <br />
-              Diseño y desarrollo digital.
-            </h2>
+            <SplitReveal
+              lines={["Brandon Lozada.", "Diseño y desarrollo digital."]}
+            />
             <p>
-              Desarrollo sitios web y aplicaciones con un enfoque en
-              funcionalidad, claridad y experiencia de usuario. Parto de los
-              objetivos del proyecto para definir una solución que pueda
-              implementarse y evolucionar.
+              Desarrollo sitios web y aplicaciones para negocios reales:
+              barberías, salones de belleza y profesionales independientes que
+              necesitan cotizar, agendar y cobrar sin complicarse. Parto de lo
+              que el negocio necesita resolver y lo convierto en una interfaz
+              clara que se pueda usar desde el primer día.
             </p>
             <p>
-              Cotiza Nails reúne este enfoque en una aplicación para
-              profesionales de la manicura: cotización de servicios,
-              organización de tarifas y seguimiento financiero.
+              Cotiza Nails es el ejemplo más completo: una app en uso que
+              reúne cotización, agenda, tarifas y finanzas, con actualizaciones
+              automáticas para quienes ya la tienen instalada.
             </p>
+            <ul className="about-facts" aria-label="Datos del perfil">
+              <li>
+                <span>Enfoque</span>
+                Apps móviles y sitios web para pequeños negocios
+              </li>
+              <li>
+                <span>Herramientas</span>
+                React · React Native · TypeScript · Python · Firebase
+              </li>
+              <li>
+                <span>Modalidad</span>
+                Proyectos independientes, de manera remota
+              </li>
+            </ul>
+            <div className="about-links">
+              <Magnetic paused={motionPaused} strength={0.2}>
+                <a
+                  className="about-link"
+                  href={github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <CodeXml size={17} /> Ver código en GitHub
+                </a>
+              </Magnetic>
+              <Magnetic paused={motionPaused} strength={0.2}>
+                <a className="about-link" href="#contacto">
+                  <MessageCircle size={17} /> Hablemos de tu proyecto
+                </a>
+              </Magnetic>
+            </div>
             <div className="location">
               <span />
               {content.location}
@@ -255,11 +303,9 @@ export default function App() {
           <Reveal className="section-heading">
             <div>
               <p className="section-kicker">Servicios profesionales</p>
-              <h2>
-                Diferentes cartas.
-                <br />
-                La misma atención al detalle.
-              </h2>
+              <SplitReveal
+                lines={["Diferentes cartas.", "La misma atención al detalle."]}
+              />
             </div>
             <a className="text-link" href="#contacto">
               Consultar disponibilidad <ArrowUpRight size={16} />
@@ -267,13 +313,14 @@ export default function App() {
           </Reveal>
           <div className="service-grid">
             {services.map(({ icon: Icon, name, detail, tags }, index) => (
-              <Reveal key={name} delay={index * 0.12}>
+              <DealIn key={name} index={index}>
                 <article
                   className={
                     selectedServices.includes(name)
-                      ? "service service-selected"
-                      : "service"
+                      ? "service spotlight service-selected"
+                      : "service spotlight"
                   }
+                  {...spotlight}
                 >
                   <span className="service-suit" aria-hidden="true">
                     {["♠", "♣", "♦"][index]}
@@ -294,37 +341,40 @@ export default function App() {
                     <span className="sr-only"> {name}</span>
                   </button>
                 </article>
-              </Reveal>
+              </DealIn>
             ))}
           </div>
+          <ServiceChips
+            selected={selectedServices}
+            onRemove={toggleService}
+            paused={motionPaused}
+          />
           <div className="selection-summary">
             <div>
               <span className="selection-label">
-                Su siguiente proyecto empieza aquí
+                Tu siguiente proyecto empieza aquí
               </span>
               <p role="status">
                 {selectedServices.length
                   ? selectedServices.join(" + ")
-                  : "Seleccione una o varias cartas para preparar su consulta."}
+                  : "Elige una o varias cartas para preparar tu consulta."}
               </p>
             </div>
-            <a className="button light" href="#contacto">
-              {selectedServices.length
-                ? "Preparar mi consulta"
-                : "Consultar un proyecto"}
-              <ArrowUpRight size={17} />
-            </a>
+            <Magnetic paused={motionPaused} strength={0.2}>
+              <a className="button light" href="#contacto">
+                {selectedServices.length
+                  ? "Preparar mi consulta"
+                  : "Consultar un proyecto"}
+                <ArrowUpRight size={17} />
+              </a>
+            </Magnetic>
           </div>
         </section>
         <ProjectWorkbench paused={motionPaused} />
         <section id="contacto" className="contact wrap">
           <Reveal className="contact-intro">
             <p className="section-kicker">Contacto profesional</p>
-            <h2>
-              Su próxima
-              <br />
-              gran jugada.
-            </h2>
+            <SplitReveal lines={["Tu próxima", "gran jugada."]} />
             <a href={`mailto:${content.email}`} className="email-link">
               {content.email}
               <ArrowUpRight size={20} />
@@ -390,17 +440,16 @@ export default function App() {
       <CasinoCompanion
         paused={motionPaused}
         selectedCount={selectedServices.length}
+        trick={jokerTrick}
         onChoose={(service, draft) => {
           setSelectedServices((current) =>
             current.includes(service) ? current : [...current, service],
           );
           setMessage((current) => current || draft);
           requestAnimationFrame(() => {
-            document
-              .getElementById("contacto")
-              ?.scrollIntoView({
-                behavior: reduced || motionPaused ? "instant" : "smooth",
-              });
+            document.getElementById("contacto")?.scrollIntoView({
+              behavior: reduced || motionPaused ? "instant" : "smooth",
+            });
             document.getElementById("idea")?.focus({ preventScroll: true });
           });
         }}
@@ -411,8 +460,11 @@ export default function App() {
           <span>Diseño & desarrollo</span>
         </a>
         <p>Desarrollo web y aplicaciones · México</p>
+        <a href={github} target="_blank" rel="noopener noreferrer">
+          GitHub <ArrowUpRight size={16} />
+        </a>
         <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-          Contacto <ArrowUpRight size={16} />
+          WhatsApp <ArrowUpRight size={16} />
         </a>
         <button
           className="motion-toggle"

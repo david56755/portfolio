@@ -1,0 +1,291 @@
+.poker-chip-tray {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 65px;
+  flex-wrap: wrap;
+  padding: 15px 0;
+}
+.poker-chip-caption {
+  color: #c9abd8;
+  font-size: 11px;
+}
+.poker-chip-stack {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding-left: 10px;
+}
+.poker-service-chip,
+.poker-empty-chip {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font:
+    24px Georgia,
+    serif;
+  margin-left: -10px;
+}
+.poker-service-chip {
+  position: relative;
+  border: 5px dashed #e7f1cb;
+  background: #5b3974;
+  color: #f1eadf;
+  box-shadow:
+    0 4px 0 #271634,
+    0 5px 10px #0005;
+  cursor: pointer;
+}
+.poker-service-chip:nth-child(2) {
+  background: #638149;
+  border-color: #d5e9b3;
+}
+.poker-service-chip:nth-child(3) {
+  background: #a15170;
+  border-color: #f0c7d6;
+}
+.poker-service-chip:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+.poker-empty-chip {
+  border: 1px dashed #b8a3c2;
+  color: #b8a3c2;
+}
+.poker-chip-remove {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  background: #2b1b38;
+  color: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 3px;
+}
+.poker-chip-count {
+  font-size: 11px;
+  color: #d8c8df;
+}
+.poker-project-reveal {
+  position: relative;
+  perspective: 1000px;
+}
+.poker-project-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  background: repeating-linear-gradient(
+    45deg,
+    #654080 0px,
+    #654080 2px,
+    #593570 2px,
+    #593570 12px
+  );
+  border: 7px solid #e3d0e8;
+  color: #e6efbb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  backface-visibility: hidden;
+  box-shadow: 0 20px 50px #26133455;
+}
+.poker-project-cover > b {
+  font-size: 100px;
+  line-height: 1;
+}
+.poker-project-cover > strong {
+  font:
+    27px Georgia,
+    serif;
+  text-align: center;
+  margin-top: 25px;
+}
+.poker-project-cover > span {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font:
+    25px Georgia,
+    serif;
+}
+.poker-project-cover > span:last-child {
+  top: auto;
+  left: auto;
+  right: 12px;
+  bottom: 12px;
+  transform: rotate(180deg);
+}
+.poker-replay {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #815b7960;
+  border-radius: 20px;
+  background: #f6e8ef;
+  color: #53364e;
+  font: 10px inherit;
+  white-space: nowrap;
+  padding: 7px 12px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+}
+.poker-replay:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.poker-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  overflow: clip;
+}
+.poker-burst-card {
+  position: absolute;
+  left: calc(50% - 20px);
+  top: 50%;
+  width: 40px;
+  height: 58px;
+  border: 1px solid #3e254d;
+  border-radius: 5px;
+  background: #f1e4d8;
+  color: #58376d;
+  display: grid;
+  place-items: center;
+  font:
+    30px Georgia,
+    serif;
+  box-shadow: 0 8px 16px #0003;
+}
+.poker-burst-card:nth-child(even) {
+  color: #a44269;
+}
+.wt-surprise {
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px dashed #c4a6d2;
+  color: #d9b9e9;
+  background: #302038;
+  font:
+    33px Georgia,
+    serif;
+  cursor: pointer;
+  z-index: 12;
+}
+.wt-surprise:hover,
+.wt-surprise:focus-visible {
+  background: #b3d581;
+  color: #2d1a39;
+  outline-offset: 5px;
+}
+.wt-surprise:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.button,
+.case-button {
+  isolation: isolate;
+  position: relative;
+}
+.button::after,
+.case-button::after {
+  content: "♠";
+  position: absolute;
+  right: 18px;
+  top: -2px;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 40px;
+  border: 1px solid #483051;
+  border-radius: 3px;
+  background: #e3cce9;
+  color: #42274d;
+  font:
+    20px Georgia,
+    serif;
+  transform: translateY(0) rotate(0);
+  opacity: 0;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+  pointer-events: none;
+}
+.button:hover::after,
+.button:focus-visible::after,
+.case-button:hover::after,
+.case-button:focus-visible::after {
+  transform: translateY(-27px) rotate(13deg);
+  opacity: 1;
+}
+.casino-greeting:not(.casino-still) .casino-arm-right {
+  animation: poker-wave 1.6s ease-in-out 1;
+}
+.casino-pointing:not(.casino-still) .casino-arm-right {
+  animation: poker-point 1.4s ease-in-out 1;
+}
+@keyframes poker-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25%,
+  65% {
+    transform: rotate(-55deg);
+  }
+  45%,
+  85% {
+    transform: rotate(-25deg);
+  }
+}
+@keyframes poker-point {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  40%,
+  75% {
+    transform: rotate(-65deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button::after,
+  .case-button::after {
+    transition: none;
+  }
+  .casino-greeting .casino-arm-right,
+  .casino-pointing .casino-arm-right {
+    animation: none !important;
+  }
+}
+.motion-paused .button::after,
+.motion-paused .case-button::after {
+  transition: none;
+}
+@media (max-width: 600px) {
+  .poker-chip-tray {
+    gap: 12px;
+  }
+  .wt-surprise {
+    right: 0;
+    width: 42px;
+    height: 42px;
+    font-size: 27px;
+  }
+  .poker-replay {
+    font-size: 9px;
+  }
+}

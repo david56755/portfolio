@@ -19,7 +19,7 @@ const choices = [
     service: "Aplicaciones a medida",
     text: "Una herramienta alrededor de lo que necesitas resolver.",
     message:
-      "Me gustaría desarrollar una aplicación. Quiero definir sus funcionalidades y el alcance del proyecto.",
+      "Me gustaría desarrollar una aplicación. Quiero definir las funcionalidades y el alcance del proyecto.",
   },
   {
     suit: "♦",
@@ -35,6 +35,7 @@ export default function CasinoCompanion({
   paused,
   onChoose,
   selectedCount = 0,
+  trick = 0,
 }) {
   const [compact, setCompact] = useState(false);
   const [dealing, setDealing] = useState(false);
@@ -65,6 +66,9 @@ export default function CasinoCompanion({
       .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    if (trick) setDealing(true);
+  }, [trick]);
   const still = paused || reduced || hiddenPage;
   useEffect(() => {
     const sync = () => setHiddenPage(document.hidden);
@@ -81,6 +85,11 @@ export default function CasinoCompanion({
     <aside
       className={
         "casino-companion" +
+        (section === "inicio"
+          ? " casino-greeting"
+          : ["proyectos", "caso-cotiza-nails"].includes(section)
+            ? " casino-pointing"
+            : "") +
         (still ? " casino-still" : "") +
         (dealing ? " casino-dealing" : "") +
         (compact ? " casino-compact" : "")

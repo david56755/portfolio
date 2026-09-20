@@ -129,6 +129,7 @@
   line-height: 1;
 }
 .case-screen-controls {
+  flex-wrap: wrap;
   display: flex;
   gap: 6px;
   justify-content: center;

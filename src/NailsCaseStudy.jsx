@@ -24,13 +24,22 @@ const chapters = [
       "Tarifas editables · Rangos mínimo y máximo · Configuración por cuenta",
   },
   {
+    label: "Citas",
+    file: "citas",
+    title: "La agenda también es parte del negocio.",
+    question: "¿Cuándo tengo un hueco para atender a alguien?",
+    decision:
+      "Un calendario con las citas del mes y los horarios libres calculados a partir del horario de trabajo de cada profesional. Si dos citas se empalman, la app lo avisa antes de guardar.",
+    detail: "Calendario mensual · Horarios disponibles · Citas pendientes y completadas",
+  },
+  {
     label: "Finanzas",
     file: "finanzas",
     title: "Cotizar y cobrar son cosas distintas.",
     question: "Una cotización todavía no es un ingreso.",
     decision:
-      "Separar las propuestas de los pagos registrados. El balance reúne cobros y gastos del mes para mostrar lo que realmente queda.",
-    detail: "Ingresos y gastos · Balance mensual · Categorías de gasto",
+      "Separar las propuestas de los pagos registrados. Una cotización se vuelve ingreso solo al marcarla como cobrada, y el balance reúne cobros y gastos del mes para mostrar lo que realmente queda.",
+    detail: "Ingresos y gastos · Balance mensual · Meta del mes",
   },
 ];
 
@@ -47,7 +56,7 @@ export default function NailsCaseStudy({ paused, onInquiry, note }) {
       <div className="wrap">
         <div className="case-masthead">
           <span>CASO DE ESTUDIO / 001</span>
-          <span>PRODUCTO EN DESARROLLO ↗</span>
+          <span>PRODUCTO EN USO ↗</span>
         </div>
         <div className="case-lead">
           <div>
@@ -61,7 +70,8 @@ export default function NailsCaseStudy({ paused, onInquiry, note }) {
           <div className="case-brief">
             <p>
               Una herramienta para ponerle precio al trabajo creativo de una
-              manicurista y organizar su negocio desde el móvil.
+              manicurista, organizar su agenda y llevar su negocio desde el
+              móvil.
             </p>
             <a href="#case-story">
               Explora las decisiones <ArrowDown size={17} />
@@ -71,22 +81,22 @@ export default function NailsCaseStudy({ paused, onInquiry, note }) {
         <dl className="case-facts">
           <div>
             <dt>El reto</dt>
-            <dd>Reunir cotización, tarifas y finanzas.</dd>
+            <dd>Reunir cotización, agenda, tarifas y finanzas.</dd>
           </div>
           <div>
             <dt>La construcción</dt>
-            <dd>React Native · TypeScript</dd>
+            <dd>React Native · TypeScript · Firebase</dd>
           </div>
           <div>
             <dt>El resultado actual</dt>
-            <dd>Versión de prueba, aún en desarrollo.</dd>
+            <dd>En uso en Android, con actualizaciones automáticas.</dd>
           </div>
         </dl>
         <div id="case-story" className="case-story">
           <div className="case-stage">
             <div className="case-stage-top">
               <span>LA INTERFAZ REAL</span>
-              <span>0{active + 1} / 03</span>
+              <span>0{active + 1} / 0{chapters.length}</span>
             </div>
             <div className="case-phone-wrap">
               <span className="case-orbit" aria-hidden="true">
@@ -227,7 +237,7 @@ export function ProfileCard({ paused }) {
               <dd>Revisar la experiencia y documentar la solución.</dd>
             </div>
           </dl>
-          <span className="profile-tools">React / Python / TypeScript</span>
+          <span className="profile-tools">React · React Native · TypeScript · Python · Firebase</span>
         </div>
       </motion.div>
       <button

@@ -1,0 +1,136 @@
+/* Títulos: cada línea sube desde una máscara. */
+.split-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.split-line {
+  display: block;
+  transform-origin: left bottom;
+  will-change: transform;
+}
+
+/* Brillo que sigue al cursor en cartas de servicio y proyecto. */
+.spotlight {
+  position: relative;
+  --mx: 50%;
+  --my: 50%;
+  --spot: 0;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--spot);
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    260px circle at var(--mx) var(--my),
+    #ffffff2e,
+    transparent 65%
+  );
+  z-index: 1;
+}
+.project-card.spotlight::after {
+  background: radial-gradient(
+    420px circle at var(--mx) var(--my),
+    #c6ea8a1c,
+    transparent 65%
+  );
+}
+.motion-paused .spotlight::after {
+  opacity: 0;
+}
+
+/* Perfil: datos concretos y enlaces. */
+.about-facts {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid #ffffff1c;
+}
+.about-facts li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ffffff1c;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #e6dfea;
+}
+.about-facts li span {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #b89cca;
+  padding-top: 3px;
+}
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid #b89cca66;
+  border-radius: 30px;
+  font-size: 12px;
+  color: #f1ecf4;
+  background: #ffffff08;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+.about-link:hover {
+  background: #c6ea8a;
+  border-color: #c6ea8a;
+  color: #1b1722;
+}
+
+/* Celular: los controles flotantes no deben tapar el contenido. */
+@media (max-width: 800px) {
+  .motion-toggle {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 11px;
+    font-size: 9px;
+  }
+  .footer {
+    padding-bottom: 130px;
+  }
+  .about-facts li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+/* Bangers solo tiene un peso: sin negrita sintética y con aire entre letras. */
+.joker-dialog h2,
+.joker-choice strong,
+.hero-watermark,
+.hero h1,
+.joker-scene::before,
+.card-title,
+.projects h2,
+.about-copy h2,
+.services h2,
+.service h3,
+.contact h2,
+.card-reverse p,
+.wt-intro h1,
+.wt-stage-word,
+.wt-front h2,
+.wt-back h3,
+.workbench-intro h2 {
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}

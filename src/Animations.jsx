@@ -103,3 +103,106 @@ export function ScrollArtwork({ children }) {
     </motion.div>
   );
 }
+
+// Cada línea sube desde una máscara cuando el título entra en pantalla.
+export function SplitReveal({
+  lines,
+  as: Tag = "h2",
+  className,
+  delay = 0,
+  ...rest
+}) {
+  const reduced = useReducedMotion();
+  return (
+    <Tag className={className} aria-label={lines.join(" ")} {...rest}>
+      {lines.map((line, index) => (
+        <span className="split-mask" key={index} aria-hidden="true">
+          <motion.span
+            className="split-line"
+            initial={{ y: reduced ? 0 : "108%", rotate: reduced ? 0 : 2 }}
+            whileInView={{ y: 0, rotate: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{
+              duration: reduced ? 0 : 0.9,
+              delay: reduced ? 0 : delay + index * 0.11,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line}
+          </motion.span>
+        </span>
+      ))}
+    </Tag>
+  );
+}
+
+// Las cartas de servicio se reparten desde el mazo, una tras otra.
+export function DealIn({ children, className, index = 0 }) {
+  const reduced = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={
+        reduced
+          ? { opacity: 0 }
+          : { opacity: 0, x: -70, y: 90, rotate: -14 + index * 4, scale: 0.9 }
+      }
+      whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: reduced ? 0 : 0.85,
+        delay: reduced ? 0 : 0.1 + index * 0.16,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// El botón se inclina hacia el cursor y regresa con un resorte al salir.
+export function Magnetic({ children, className, paused = false, strength = 0.32 }) {
+  const reduced = useReducedMotion();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const dx = useSpring(x, { stiffness: 220, damping: 18 });
+  const dy = useSpring(y, { stiffness: 220, damping: 18 });
+  const reset = () => {
+    x.set(0);
+    y.set(0);
+  };
+  function move(event) {
+    if (reduced || paused || event.pointerType !== "mouse") return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    x.set((event.clientX - rect.left - rect.width / 2) * strength);
+    y.set((event.clientY - rect.top - rect.height / 2) * strength);
+  }
+  return (
+    <motion.div
+      className={className}
+      onPointerMove={move}
+      onPointerLeave={reset}
+      onPointerCancel={reset}
+      style={{ x: reduced || paused ? 0 : dx, y: reduced || paused ? 0 : dy, display: "inline-block" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Un brillo sigue al cursor sobre la tarjeta mediante variables CSS.
+export function useSpotlight(paused = false) {
+  const reduced = useReducedMotion();
+  return {
+    onPointerMove(event) {
+      if (reduced || paused || event.pointerType !== "mouse") return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      event.currentTarget.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+      event.currentTarget.style.setProperty("--my", `${event.clientY - rect.top}px`);
+      event.currentTarget.style.setProperty("--spot", "1");
+    },
+    onPointerLeave(event) {
+      event.currentTarget.style.setProperty("--spot", "0");
+    },
+  };
+}

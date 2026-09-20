@@ -18,7 +18,7 @@
   right: -70px;
   bottom: 18px;
   color: #c5a0da0a;
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   font-size: 215px;
   line-height: 1;
   white-space: nowrap;
@@ -26,7 +26,7 @@
   pointer-events: none;
 }
 .hero h1 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: clamp(90px, 9.1vw, 132px);
@@ -79,7 +79,7 @@
   right: -36px;
   top: 68px;
   writing-mode: vertical-rl;
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   font-size: 17px;
   letter-spacing: 5px;
   color: #a38bab;
@@ -116,7 +116,7 @@
 }
 .card-title {
   bottom: 71px;
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   font-size: 64px;
   letter-spacing: 5px;
 }
@@ -180,7 +180,7 @@
   color: #766d7b;
 }
 .projects h2 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   text-transform: uppercase;
   font-size: 74px;
   font-weight: 600;
@@ -268,7 +268,7 @@
   color: #c4ed79;
 }
 .about-copy h2 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   text-transform: uppercase;
   font-size: 50px;
   line-height: 1.04;
@@ -278,7 +278,7 @@
   padding-top: 50px;
 }
 .services h2 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   text-transform: uppercase;
   font-size: 54px;
   line-height: 1.04;
@@ -323,7 +323,7 @@
   color: #2e2037;
 }
 .service h3 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   text-transform: uppercase;
   font-size: 33px;
   font-weight: 600;
@@ -362,7 +362,7 @@
   pointer-events: none;
 }
 .contact h2 {
-  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-family: "Bangers", Impact, sans-serif;
   text-transform: uppercase;
   font-size: 75px;
   line-height: 0.95;

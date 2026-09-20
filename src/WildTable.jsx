@@ -14,6 +14,7 @@ import {
   Undo2,
 } from "lucide-react";
 import "./wild-table.css";
+import { CardBurst } from "./PokerEffects";
 
 const cards = [
   {
@@ -68,6 +69,7 @@ function TableCard({
   resetKey,
 }) {
   const [flipped, setFlipped] = useState(false);
+  const [arrived, setArrived] = useState(false);
   const controls = useDragControls();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -96,16 +98,26 @@ function TableCard({
   return (
     <motion.div
       className={`wt-placement wt-placement-${index} ${active ? "wt-active" : ""}`}
-      initial={false}
+      initial={
+        quiet ? false : { x: 0, y: 95, rotate: -35, scale: 0.74, opacity: 0 }
+      }
+      onAnimationComplete={() => setArrived(true)}
       animate={{
         x: position.x,
         y: position.y,
         rotate: position.rotate,
+        scale: 1,
+        opacity: 1,
       }}
       transition={
         quiet
           ? { duration: 0 }
-          : { type: "spring", stiffness: 140, damping: 24 }
+          : {
+              type: "spring",
+              stiffness: 140,
+              damping: 24,
+              delay: arrived ? 0 : 0.15 + index * 0.19,
+            }
       }
       style={{ zIndex: active ? 10 : index + 1 }}
     >
@@ -215,7 +227,13 @@ function TableCard({
   );
 }
 
-export default function WildTable({ paused = false }) {
+export default function WildTable({ paused = false, onSurprise }) {
+  const [burst, setBurst] = useState(false);
+  useEffect(() => {
+    if (!burst) return;
+    const timer = setTimeout(() => setBurst(false), 2000);
+    return () => clearTimeout(timer);
+  }, [burst]);
   const stage = useRef(null);
   const cardLinks = useRef([]);
   const reduced = useReducedMotion();
@@ -293,6 +311,19 @@ export default function WildTable({ paused = false }) {
         className={`wt-stage wrap ${spread ? "wt-spread" : "wt-stacked"}`}
         ref={stage}
       >
+        <CardBurst active={burst} quiet={quiet} />
+        <button
+          className="wt-surprise"
+          type="button"
+          aria-label="Truco del Joker: lanzar cartas"
+          disabled={quiet || burst}
+          onClick={() => {
+            setBurst(true);
+            onSurprise?.();
+          }}
+        >
+          ♠
+        </button>
         <span className="wt-stage-word" aria-hidden="true">
           ♠
         </span>

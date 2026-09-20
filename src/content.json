@@ -1,19 +1,20 @@
 {
   "name": "Brandon Lozada",
   "location": "CDMX, México",
-  "email": "brandon@brandondev.mx",
+  "email": "davig53755@gmail.com",
   "whatsapp": "525571831083",
   "project": {
     "name": "Cotiza Nails",
-    "description": "Una app para que las manicuristas coticen su trabajo, organicen sus tarifas y lleven el control de sus ingresos y gastos.",
-    "stack": ["React Native", "TypeScript"],
-    "status": "Android · Versión de prueba 1.3.0",
+    "description": "Una app para que las manicuristas coticen su trabajo, agenden sus citas, organicen sus tarifas y lleven el control de sus ingresos y gastos.",
+    "stack": ["React Native", "TypeScript", "Firebase"],
+    "status": "Android · Versión 1.3 en uso",
     "features": [
-      "Cotizaciones personalizadas",
-      "Tarifas e historial",
-      "Balance de ingresos y gastos",
-      "Cotizaciones en PDF"
+      "Cotizaciones con desglose y PDF",
+      "Agenda de citas con horarios libres",
+      "Fotos de referencia y logo propio",
+      "Tarifas e historial por cuenta",
+      "Balance de ingresos y gastos"
     ],
-    "note": "Proyecto en desarrollo. Algunas funciones de guardado en la nube siguen pendientes de activación. Aún no disponible en Google Play."
+    "note": "La app ya está en manos de las primeras manicuristas que la usan en Android y recibe mejoras automáticamente. La publicación en Google Play está en preparación."
   }
 }

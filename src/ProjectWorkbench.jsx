@@ -247,9 +247,9 @@ export default function ProjectWorkbench({ paused = false }) {
                 <span>✳</span>cotiza nails<i>Ejemplo</i>
               </div>
               <h4>
-                Su trabajo.
+                Tu trabajo.
                 <br />
-                Su valor.
+                Tu valor.
               </h4>
               <div className="wb-app-nails">
                 <i />

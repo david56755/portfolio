@@ -7,6 +7,7 @@ import "./professional.css";
 import "./joker.css";
 import "./editorial.css";
 import "./interactive.css";
+import "./motion-extras.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
