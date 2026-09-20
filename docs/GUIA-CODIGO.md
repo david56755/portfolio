@@ -281,4 +281,40 @@ Prettier ordena sangrías y saltos de línea para que el código sea más fácil
 4. Cambia el cargo de decoración de 60 a 70 en `NailPreview.jsx`. Con largo 3 debe mostrar 340.
 5. Ejecuta `npm run build` para comprobar que tu edición sigue compilando.
 
-Antes de publicar, confirma contacto, presentación personal y el estado actual de Cotiza Nails. La web aún no está desplegada en Internet; abrirla localmente no la publica.
+Antes de publicar, confirma contacto, presentación personal y el estado actual de Cotiza Nails. La web está publicada en GitHub Pages; abrir o modificar la copia local no actualiza automáticamente la versión pública.
+
+## 11. Caso de estudio: NailsCaseStudy.jsx
+
+Este archivo exporta dos componentes de React: `NailsCaseStudy` (el caso de Cotiza Nails) y `ProfileCard` (la carta personal). Se importan en `App.jsx`. La ficha principal ahora enlaza al caso visible en lugar de desplegar el antiguo resumen.
+
+### Datos y pantalla activa
+
+`chapters` contiene tres objetos: cada uno define el nombre de la pantalla, el archivo de imagen, el problema y la decisión de diseño. `map` convierte estos datos en botones y artículos. Así, imagen, etiqueta y explicación usan una misma fuente.
+
+`useState(0)` recuerda el índice de la captura activa. Al pulsar un botón, `setActive(index)` cambia ese índice. En escritorio, `onViewportEnter` también lo cambia cuando el 65 % de un artículo entra en la pantalla. `matchMedia` limita ese comportamiento a ventanas mayores de 800 píxeles; en móvil la galería se controla con sus botones. No hay reproducción automática por tiempo.
+
+`AnimatePresence` y `motion.img` hacen una transición de opacidad y un desplazamiento breve. `key={active}` identifica cada imagen. `mode="wait"` termina la salida antes de iniciar la entrada. `useReducedMotion` y la propiedad `paused` ponen la duración en cero cuando se ha solicitado reducir o pausar efectos.
+
+Las rutas usan `import.meta.env.BASE_URL` para funcionar tanto localmente como dentro de /portfolio/ en GitHub Pages. Las imágenes tienen dimensiones declaradas y texto alternativo; el teléfono conserva su proporción para evitar saltos de diseño.
+
+### Capturas y fidelidad
+
+`public/cotiza-nails/cotizar.png`, `precios.png` y `finanzas.png` se capturaron desde la aplicación local de Cotiza Nails, en su versión web, con una ventana de 390 × 844 y modo demo sin cuenta. No son fotografías de una instalación Android y no contienen datos de clientes. Finanzas muestra el estado vacío real. La demo interactiva de `NailPreview.jsx` sigue siendo una ilustración independiente, identificada como tal.
+
+### Carta personal
+
+`ProfileCard` usa el estado booleano `flipped`. Su botón alterna ese estado y una rotación de 0 a 180 grados revela la otra cara. CSS emplea `perspective`, `transform-style: preserve-3d` y `backface-visibility: hidden` para crear profundidad. `aria-hidden` oculta la cara inactiva a lectores de pantalla; el botón conserva su foco y comunica el estado mediante `aria-pressed`.
+
+### Estilos y adaptación
+
+`src/case-study.css` define las clases del caso, de la carta y del nuevo contacto. La historia usa una cuadrícula de dos columnas; `position: sticky` mantiene las capturas a la vista mientras se leen los artículos. A 800 píxeles o menos se convierte en una columna y la galería deja de ser fija. Los selectores están acotados para respetar la portada existente. `clamp` adapta los títulos; las reglas de movimiento reducido eliminan las transiciones opcionales.
+
+### Consulta conectada al proyecto
+
+El botón «Quiero una app para mi negocio» añade «Aplicaciones a medida» a `selectedServices` sin duplicarlo y prepara un texto solo si el visitante no había escrito nada. Se conserva cualquier otro servicio elegido. El enlace lleva a contacto, donde un `fieldset` agrupa las tres opciones. Todos los botones usan `type="button"` para evitar envíos involuntarios.
+
+El texto final `inquiry` une servicios y mensaje. Un elemento nativo `details` permite revisarlo antes de abrir WhatsApp. No se envían mensajes automáticamente. `Animations.jsx` también recibe ahora `paused` en `Tilt` para detener la inclinación de la ficha principal cuando se pausan efectos.
+
+### Comprobaciones de esta actualización
+
+Se compiló con `npm run build:pages` y se revisó la versión compilada a 1440 y 390 píxeles. Se comprobaron selección de capturas, giro reversible de la carta, consulta desde el proyecto conservando estado, vista previa y pausa de efectos. La revisión no registró errores de JavaScript. No se enviaron mensajes reales.

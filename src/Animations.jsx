@@ -52,7 +52,7 @@ export function HeroTitle() {
 }
 
 // MotionValue actualiza transformaciones sin renderizar React por cada píxel.
-export function Tilt({ children, className }) {
+export function Tilt({ children, className, paused = false }) {
   const reduced = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -63,7 +63,7 @@ export function Tilt({ children, className }) {
     y.set(0);
   };
   function move(event) {
-    if (reduced || event.pointerType !== "mouse") return;
+    if (reduced || paused || event.pointerType !== "mouse") return;
     const rect = event.currentTarget.getBoundingClientRect();
     x.set(-((event.clientY - rect.top) / rect.height - 0.5) * 7);
     y.set(((event.clientX - rect.left) / rect.width - 0.5) * 7);
@@ -75,8 +75,8 @@ export function Tilt({ children, className }) {
       onPointerLeave={reset}
       onPointerCancel={reset}
       style={{
-        rotateX: reduced ? 0 : rotateX,
-        rotateY: reduced ? 0 : rotateY,
+        rotateX: reduced || paused ? 0 : rotateX,
+        rotateY: reduced || paused ? 0 : rotateY,
         transformPerspective: 1100,
       }}
     >

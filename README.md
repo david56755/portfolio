@@ -74,7 +74,7 @@ npm run build
 .venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
-Abre http://127.0.0.1:8000. Compila **antes** de arrancar Python. Si estaba iniciado antes de que existiera `dist`, reinícialo. Estos comandos sirven para revisar localmente; aún no se ha publicado la web.
+Abre http://127.0.0.1:8000. Compila **antes** de arrancar Python. Si estaba iniciado antes de que existiera `dist`, reinícialo. Estos comandos sirven para revisar localmente. La versión pública se publica por separado en GitHub Pages.
 
 ## Personalizar
 
@@ -104,3 +104,14 @@ Pasaron la compilación de producción y las comprobaciones en Chrome automatiza
 ### Revisión anterior del rediseño de cartas y servicios
 
 La compilación final pasó. Se comprobaron en el navegador el giro por clic y teclado, el reparto de cartas, la selección múltiple de servicios, la eliminación de una selección conservando el texto, la pausa de efectos y el cierre del menú con Escape. Se revisaron pantallas de 320, 390 y 1440 píxeles y se corrigió el titular en el tamaño menor. No se enviaron mensajes reales. La consola no reportó errores de JavaScript durante la revisión.
+
+## Caso de estudio y publicación actual
+
+La web está publicada en https://david56755.github.io/portfolio/.
+
+- Caso de estudio de Cotiza Nails con capturas reales de su versión web en modo demo, decisiones y estado de desarrollo.
+- Galería que acompaña la lectura en escritorio, con selección manual de pantallas en todos los tamaños.
+- Carta personal de dos caras y consulta de contacto con servicios seleccionables y vista previa del mensaje.
+- Código: `src/NailsCaseStudy.jsx`, estilos: `src/case-study.css`, capturas: `public/cotiza-nails/`.
+
+Para publicar cambios, primero confirma y sube el código a `main`; después ejecuta `npm run deploy`. El script compila con el modo Pages y actualiza la rama `gh-pages`. GitHub Pages sirve archivos estáticos; el backend Python no se ejecuta allí.

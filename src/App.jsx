@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useSpring,
-  useReducedMotion,
-} from "motion/react";
+import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
   Braces,
@@ -22,6 +16,7 @@ import initialContent from "./content.json";
 import NailPreview from "./NailPreview";
 import WildTable from "./WildTable";
 import ProjectWorkbench from "./ProjectWorkbench";
+import NailsCaseStudy, { ProfileCard } from "./NailsCaseStudy";
 import { Reveal, Tilt } from "./Animations";
 
 const services = [
@@ -51,7 +46,6 @@ const services = [
 export default function App() {
   const [content, setContent] = useState(initialContent);
   const [menu, setMenu] = useState(false);
-  const [details, setDetails] = useState(false);
   const [message, setMessage] = useState("");
   const [motionPaused, setMotionPaused] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -185,7 +179,7 @@ export default function App() {
             <span className="section-aside">De la necesidad a la solución</span>
           </Reveal>
           <Reveal>
-            <Tilt className="project-card">
+            <Tilt className="project-card" paused={motionPaused}>
               <div className="project-visual">
                 <div className="project-wordmark">
                   cotiza
@@ -212,63 +206,32 @@ export default function App() {
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-                <button
-                  className="case-button"
-                  aria-expanded={details}
-                  aria-controls="project-details"
-                  onClick={() => setDetails(!details)}
-                >
-                  {details ? "Cerrar el proyecto" : "Conocer el proyecto"}
-                  <motion.span animate={{ rotate: details ? 45 : 0 }}>
-                    <Plus size={22} />
-                  </motion.span>
-                </button>
+                <a className="case-button" href="#caso-cotiza-nails">
+                  Explorar el caso de estudio <ArrowUpRight size={22} />
+                </a>
               </div>
             </Tilt>
           </Reveal>
-          <AnimatePresence initial={false}>
-            {details && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: reduced ? 0 : 0.4 }}
-                style={{ overflow: "hidden" }}
-              >
-                <div id="project-details" className="project-details">
-                  <div>
-                    <h3>Objetivo y alcance del proyecto</h3>
-                    <p>
-                      La aplicación reúne el cálculo de servicios y la gestión
-                      del negocio en una experiencia móvil. La demo de arriba
-                      permite cambiar el largo, añadir decoración y explorar un
-                      ejemplo de finanzas.
-                    </p>
-                  </div>
-                  <div>
-                    <ul>
-                      {content.project.features.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                    <p className="project-note">{content.project.note}</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </section>
+        <NailsCaseStudy
+          paused={motionPaused}
+          note={content.project.note}
+          onInquiry={() => {
+            setSelectedServices((current) =>
+              current.includes("Aplicaciones a medida")
+                ? current
+                : [...current, "Aplicaciones a medida"],
+            );
+            setMessage(
+              (current) =>
+                current ||
+                "Me interesa desarrollar una aplicación para mi negocio. Me gustaría conversar sobre las funcionalidades y el alcance.",
+            );
+          }}
+        />
         <section id="sobre-mi" className="about wrap section">
           <Reveal>
-            <Tilt className="about-art">
-              <div className="blueprint-scan" aria-hidden="true" />
-              <div className="bracket">{"{"}</div>
-              <div className="about-monogram">
-                b<span>l.</span>
-              </div>
-              <div className="bracket">{"}"}</div>
-              <span>Brandon Lozada / Desarrollo digital</span>
-            </Tilt>
+            <ProfileCard paused={motionPaused} />
           </Reveal>
           <Reveal className="about-copy" delay={0.12}>
             <p className="section-kicker">Perfil profesional</p>
@@ -382,21 +345,29 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="contact-selection">
-                {selectedServices.map((name) => (
-                  <button
-                    type="button"
-                    key={name}
-                    onClick={() => toggleService(name)}
-                    aria-label={`Quitar ${name}`}
-                  >
-                    {name}
-                    <X size={12} />
-                  </button>
-                ))}
-              </div>
+              <fieldset className="contact-options">
+                <legend>1. ¿Qué te gustaría crear?</legend>
+                <div>
+                  {services.map(({ name }, index) => (
+                    <button
+                      type="button"
+                      key={name}
+                      aria-pressed={selectedServices.includes(name)}
+                      onClick={() => toggleService(name)}
+                    >
+                      {
+                        [
+                          "Una página web",
+                          "Una aplicación",
+                          "Una automatización",
+                        ][index]
+                      }
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
               <input type="hidden" name="text" value={inquiry} />
-              <label htmlFor="idea">Describa su proyecto</label>
+              <label htmlFor="idea">2. Cuéntame tu idea</label>
               <textarea
                 id="idea"
                 placeholder="Objetivos, funcionalidades y plazo estimado…"
@@ -405,6 +376,13 @@ export default function App() {
                 onChange={(event) => setMessage(event.target.value)}
                 required
               />
+              <details className="inquiry-preview">
+                <summary>Revisar mi consulta</summary>
+                <p>
+                  {inquiry ||
+                    "Elige un servicio y escribe tu idea para preparar el mensaje."}
+                </p>
+              </details>
               <button className="button light" type="submit">
                 Continuar en WhatsApp <MessageCircle size={18} />
               </button>
