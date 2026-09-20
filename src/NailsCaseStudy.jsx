@@ -75,7 +75,7 @@ export default function NailsCaseStudy({ paused, onInquiry, note }) {
           </div>
           <div>
             <dt>La construcción</dt>
-            <dd>React Native · Expo · TypeScript · Firebase</dd>
+            <dd>React Native · TypeScript</dd>
           </div>
           <div>
             <dt>El resultado actual</dt>

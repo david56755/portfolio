@@ -318,3 +318,13 @@ El texto final `inquiry` une servicios y mensaje. Un elemento nativo `details` p
 ### Comprobaciones de esta actualización
 
 Se compiló con `npm run build:pages` y se revisó la versión compilada a 1440 y 390 píxeles. Se comprobaron selección de capturas, giro reversible de la carta, consulta desde el proyecto conservando estado, vista previa y pausa de efectos. La revisión no registró errores de JavaScript. No se enviaron mensajes reales.
+
+## 12. Comodín y efectos de póker
+
+`src/CasinoCompanion.jsx` dibuja el personaje con SVG: cuerpo, cabeza, brazos, ojos y cartas son grupos independientes. `src/casino.css` anima esas piezas mediante `transform` y `opacity`, sin vídeos ni solicitudes externas. Los estados `compact` y `dealing` controlan minimizar y el lanzamiento de cartas al pulsar. Un temporizador termina el lanzamiento y se limpia al desmontar el componente.
+
+El personaje queda fijo en la esquina inferior izquierda; en móvil reduce su tamaño. El botón de minimizar lo transforma en una pequeña ficha que permite recuperarlo. La preferencia del sistema de movimiento reducido, el botón global de pausa y el evento `visibilitychange` detienen sus animaciones. Los botones tienen nombres accesibles; el SVG es decorativo.
+
+Las cartas de servicios giran su símbolo al pasar el cursor y muestran una ficha animada al seleccionarlas. La flecha de portada tiene una oscilación espaciada. Los nombres Expo y Firebase se retiraron de todos los textos de la web: `App.jsx`, `WildTable.jsx`, `NailsCaseStudy.jsx` y `content.json`. Esto modifica la presentación del portafolio, no la implementación de Cotiza Nails.
+
+Validación: compilación Pages, ausencia de ambos nombres en el DOM, barajado por clic, minimizar/restaurar, pausa global, revisión móvil de 390 píxeles sin desbordamiento y consola sin errores.

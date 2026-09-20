@@ -6,7 +6,7 @@
   "project": {
     "name": "Cotiza Nails",
     "description": "Una app para que las manicuristas coticen su trabajo, organicen sus tarifas y lleven el control de sus ingresos y gastos.",
-    "stack": ["React Native", "Expo", "TypeScript", "Firebase"],
+    "stack": ["React Native", "TypeScript"],
     "status": "Android · Versión de prueba 1.3.0",
     "features": [
       "Cotizaciones personalizadas",

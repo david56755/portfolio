@@ -15,6 +15,7 @@ import {
 import initialContent from "./content.json";
 import NailPreview from "./NailPreview";
 import WildTable from "./WildTable";
+import CasinoCompanion from "./CasinoCompanion";
 import ProjectWorkbench from "./ProjectWorkbench";
 import NailsCaseStudy, { ProfileCard } from "./NailsCaseStudy";
 import { Reveal, Tilt } from "./Animations";
@@ -161,8 +162,6 @@ export default function App() {
             </b>
             <b>Python</b>
             <b>TypeScript</b>
-            <b>Expo</b>
-            <b>Firebase</b>
             <span className="strip-star">✳</span>
           </div>
         </div>
@@ -394,6 +393,7 @@ export default function App() {
           </Reveal>
         </section>
       </main>
+      <CasinoCompanion paused={motionPaused} />
       <footer className="footer wrap">
         <a href="#inicio" className="footer-name">
           {content.name}

@@ -26,7 +26,7 @@ const cards = [
     reverseTitle: "Tu talento tiene valor.",
     reverse:
       "Una aplicación Android para cotizar servicios de manicura y organizar ingresos y gastos.",
-    detail: "React Native · Expo · Firebase",
+    detail: "React Native · TypeScript",
     status: "Android · En desarrollo",
   },
   {
