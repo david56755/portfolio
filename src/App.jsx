@@ -180,10 +180,8 @@ export default function App() {
         <section id="proyectos" className="projects wrap section">
           <Reveal className="section-heading">
             <div>
-              <p className="section-kicker">Portafolio de desarrollo</p>
               <SplitReveal lines={["El trabajo", "habla."]} />
             </div>
-            <span className="section-aside">De la necesidad a la solución</span>
           </Reveal>
           <Reveal>
             <Tilt className="project-card spotlight" paused={motionPaused}>

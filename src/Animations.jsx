@@ -113,15 +113,26 @@ export function SplitReveal({
   ...rest
 }) {
   const reduced = useReducedMotion();
+  const MotionTag = motion[Tag];
+  // El título completo dispara la entrada: cada línea empieza recortada por su
+  // máscara, así que observarla a ella misma nunca la detectaría en pantalla.
   return (
-    <Tag className={className} aria-label={lines.join(" ")} {...rest}>
+    <MotionTag
+      className={className}
+      aria-label={lines.join(" ")}
+      initial="hidden"
+      whileInView="shown"
+      viewport={{ once: true, amount: 0.3 }}
+      {...rest}
+    >
       {lines.map((line, index) => (
         <span className="split-mask" key={index} aria-hidden="true">
           <motion.span
             className="split-line"
-            initial={{ y: reduced ? 0 : "108%", rotate: reduced ? 0 : 2 }}
-            whileInView={{ y: 0, rotate: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
+            variants={{
+              hidden: { y: reduced ? 0 : "108%", rotate: reduced ? 0 : 2 },
+              shown: { y: 0, rotate: 0 },
+            }}
             transition={{
               duration: reduced ? 0 : 0.9,
               delay: reduced ? 0 : delay + index * 0.11,
@@ -132,7 +143,7 @@ export function SplitReveal({
           </motion.span>
         </span>
       ))}
-    </Tag>
+    </MotionTag>
   );
 }
 
