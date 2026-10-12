@@ -174,6 +174,9 @@ export default function App() {
             </b>
             <b>Python</b>
             <b>TypeScript</b>
+            <b>HTML</b>
+            <b>CSS</b>
+            <b>JavaScript</b>
             <span className="strip-star">✳</span>
           </div>
         </div>
